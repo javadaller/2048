@@ -1,0 +1,29 @@
+main {
+    width: 100%;
+    height: 85vh;
+    background-color: var(--color_background);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#grid {
+    height:65vh;
+    width:65vh;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.case {
+    width:25%;
+    height:25%;
+    border:solid 1px red;
+}
+
+#start_button {
+    color:white;
+    margin-top: 20px;
+    padding:5px;
+    border: solid 1px rgb(46, 46, 46);
+}
