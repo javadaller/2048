@@ -15,10 +15,28 @@ main {
     flex-wrap: wrap;
 }
 
+#grid > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .case {
     width:25%;
     height:25%;
     border:solid 1px red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    width:95%;
+    height:95%;
+    color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #start_button {
@@ -26,4 +44,5 @@ main {
     margin-top: 20px;
     padding:5px;
     border: solid 1px rgb(46, 46, 46);
+    cursor:pointer;
 }
