@@ -79,3 +79,19 @@ return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 //------------------------------------------------------------------------------------------
+
+// GRID SHAKING
+async function gridShaking() {
+    grid.classList.add('gridShaking');
+    await sleep(200);
+    grid.classList.remove('gridShaking');
+}
+
+//------------------------------------------------------------------------------------------
+
+// ANIMATION FUSION
+async function animationFusion(div) {
+    div.classList.add('blockFusion');
+    await sleep(200);
+    div.classList.remove('blockFusion');
+}

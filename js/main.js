@@ -32,7 +32,7 @@ function startGame() {
 }
 
 //CLAVIER-------------------------------------------------------------
-async function handleKeyDown(event) {
+function handleKeyDown(event) {
     // Retirer l'attribut merged de tous les blocs
     const allBlocks = document.querySelectorAll('.box');
     allBlocks.forEach(block => {
@@ -48,7 +48,7 @@ async function handleKeyDown(event) {
                 for(let x=1; x<4; x++) {
                     for(let y=0; y<4; y++) {
                         if(gridArray[x][y]!=0) {
-                            movePossible = await moveBlock(x, y, -1, 0) || movePossible;
+                            movePossible = moveBlock(x, y, -1, 0) || movePossible;
                         }
                     }
                 }
@@ -58,7 +58,7 @@ async function handleKeyDown(event) {
                 for(let x=2; x>=0; x--) {
                     for(let y=0; y<4; y++) {
                         if(gridArray[x][y]!=0) {
-                            movePossible = await moveBlock(x, y, 1, 0) || movePossible;
+                            movePossible = moveBlock(x, y, 1, 0) || movePossible;
                         }
                     }
                 }
@@ -68,7 +68,7 @@ async function handleKeyDown(event) {
                 for(let x=0; x<4; x++) {
                     for(let y=1; y<4; y++) {
                         if(gridArray[x][y]!=0) {
-                            movePossible = await moveBlock(x, y, 0, -1) || movePossible;
+                            movePossible = moveBlock(x, y, 0, -1) || movePossible;
                         }
                     }
                 }
@@ -78,7 +78,7 @@ async function handleKeyDown(event) {
                 for(let x=0; x<4; x++) {
                     for(let y=2; y>=0; y--) {
                         if(gridArray[x][y]!=0) {
-                            movePossible = await moveBlock(x, y, 0, 1) || movePossible;
+                            movePossible = moveBlock(x, y, 0, 1) || movePossible;
                         }
                     }
                 }
@@ -97,9 +97,7 @@ async function handleKeyDown(event) {
     // Annuler la frappe de clavier
     if (!movePossible) {
         event.preventDefault();
-        grid.classList.add('gridShaking');
-        await sleep(200);
-        grid.classList.remove('gridShaking');
+        gridShaking();
     }
 }
 
@@ -107,7 +105,7 @@ document.addEventListener('keyup', handleKeyDown);
 
 //BOUGER LES BLOCS- --------------------------------------
 
-async function moveBlock(x, y, dx, dy) {
+function moveBlock(x, y, dx, dy) {
     const block = document.querySelector("#case" + x + y).firstChild;
     let mergeOccurred = false;
     let moved = false;
@@ -140,9 +138,7 @@ async function moveBlock(x, y, dx, dy) {
             }
             moved = true;
             // animation fusion
-            newBlock.classList.add('blockFusion');
-            await sleep(200);
-            newBlock.classList.remove('blockFusion');
+            animationFusion(newBlock);
             break;
         } else {
             // Case occupée
