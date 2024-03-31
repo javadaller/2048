@@ -1,0 +1,8 @@
+@font-face {
+	font-family: 'Unbutu';
+	src:url('../assets/fonts/Ubuntu-Regular.ttf') format('truetype')
+}
+
+body {
+    font-family: 'Unbutu', cursive;
+}

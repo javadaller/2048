@@ -1,27 +1,43 @@
 :root {
+    --color1:rgb(179, 131, 27);
+    --color2:rgb(0, 12, 59);
     --color_signature: white;
     --color_title:white;
     --color_background:rgb(78, 78, 78);
+    --caseBackground:rgb(63, 53, 47);
+    --gridBackground:#5e3200a1;
 }
 
 .box2 {
-    background-color: rgb(100, 79, 194);
+    background-color: rgb(79, 90, 194);
 }
 .box4 {
-    background-color: rgb(57, 45, 109);
+    background-color: rgb(62, 50, 117);
 }
 .box8 {
     background-color: rgb(46, 25, 59);
 }
 .box16 {
-    background-color: rgb(83, 45, 109);
+    background-color: rgb(45, 85, 109);
 }
 .box32 {
-    background-color: rgb(106, 65, 153);
+    background-color: rgb(65, 143, 153);
 }
 .box64 {
-    background-color: rgb(109, 45, 106);
+    background-color: rgb(109, 92, 45);
 }
 .box128 {
-    background-color: rgb(145, 59, 140);
+    background-color: rgb(145, 83, 59);
+}
+.box256 {
+    background-color: rgb(202, 103, 78);
+}
+.box512 {
+    background-color: rgb(202, 169, 78);
+}
+.box1024 {
+    background-color: rgb(167, 37, 37);
+}
+.box2048 {
+    background-color: rgb(223, 17, 17);
 }

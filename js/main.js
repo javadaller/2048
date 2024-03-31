@@ -17,7 +17,7 @@ function startGame() {
 
     //remettre le tableau à zéro
     gridArray=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
-    
+
     //effacer les blocs
     gridChildren.forEach(child => {
         child.innerHTML = '';
@@ -101,7 +101,7 @@ document.addEventListener('keyup', handleKeyDown);
 
 //BOUGER LES BLOCS- --------------------------------------
 
-function moveBlock(x, y, dx, dy) {
+async function moveBlock(x, y, dx, dy) {
     const block = document.querySelector("#case" + x + y).firstChild;
     let mergeOccurred = false;
     let moved = false;
@@ -133,6 +133,10 @@ function moveBlock(x, y, dx, dy) {
                 newBlock.setAttribute('merged', true);
             }
             moved = true;
+            //animation fusion
+            newBlock.classList.add('blockFusion');
+            await sleep(200);
+            newBlock.classList.remove('blockFusion');
             break;
         } else {
             // Case occupée
