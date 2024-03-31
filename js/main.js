@@ -37,7 +37,7 @@ function handleKeyDown(event) {
     allBlocks.forEach(block => {
         block.removeAttribute('merged');
     });
-    
+
     switch(event.key) {
         case "ArrowUp":
             // haut
@@ -106,7 +106,7 @@ function moveBlockUp(x, y) {
             // Case occupée
             if (gridArray[i][y] === gridArray[x][y] && !mergeOccurred) {
                 const newBlock = document.querySelector("#case" + i + y).firstChild;
-                if (!newBlock.getAttribute('merged')) { // Vérifier si le bloc n'a pas déjà fusionné
+                if (!newBlock.getAttribute('merged')) {
                     const value = gridArray[i][y] * 2;
                     gridArray[i][y] = value;
                     gridArray[x][y] = 0;
@@ -115,7 +115,7 @@ function moveBlockUp(x, y) {
                     newBlock.classList.add('box' + value);
                     block.remove();
                     mergeOccurred = true;
-                    newBlock.setAttribute('merged', true); // Marquer le bloc comme fusionné
+                    newBlock.setAttribute('merged', true);
                 }
             }
             break;
