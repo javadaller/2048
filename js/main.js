@@ -1,6 +1,6 @@
 //INIT-----------------------------------------
 let started=false;
-let gridArray;
+let gridArray,youLoose;
 const grid=document.querySelector('#grid');
 const gridChildren=Array.from(grid.children);
 const start=document.querySelector('#start_button');
@@ -14,6 +14,7 @@ function startGame() {
         start.innerHTML='RESTART';
     }
     started=true;
+    youLoose=false;
 
     //remettre le tableau à zéro
     gridArray=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
@@ -40,49 +41,51 @@ async function handleKeyDown(event) {
 
     let movePossible = false;
 
-    switch(event.key) {
-        case "ArrowUp":
-            // haut
-            for(let x=1; x<4; x++) {
-                for(let y=0; y<4; y++) {
-                    if(gridArray[x][y]!=0) {
-                        movePossible = await moveBlock(x, y, -1, 0) || movePossible;
+    if(!youLoose) {
+        switch(event.key) {
+            case "ArrowUp":
+                // haut
+                for(let x=1; x<4; x++) {
+                    for(let y=0; y<4; y++) {
+                        if(gridArray[x][y]!=0) {
+                            movePossible = await moveBlock(x, y, -1, 0) || movePossible;
+                        }
                     }
                 }
-            }
-            break;
-        case "ArrowDown":
-            // bas
-            for(let x=2; x>=0; x--) {
-                for(let y=0; y<4; y++) {
-                    if(gridArray[x][y]!=0) {
-                        movePossible = await moveBlock(x, y, 1, 0) || movePossible;
+                break;
+            case "ArrowDown":
+                // bas
+                for(let x=2; x>=0; x--) {
+                    for(let y=0; y<4; y++) {
+                        if(gridArray[x][y]!=0) {
+                            movePossible = await moveBlock(x, y, 1, 0) || movePossible;
+                        }
                     }
                 }
-            }
-            break;
-        case "ArrowLeft":
-            // gauche
-            for(let x=0; x<4; x++) {
-                for(let y=1; y<4; y++) {
-                    if(gridArray[x][y]!=0) {
-                        movePossible = await moveBlock(x, y, 0, -1) || movePossible;
+                break;
+            case "ArrowLeft":
+                // gauche
+                for(let x=0; x<4; x++) {
+                    for(let y=1; y<4; y++) {
+                        if(gridArray[x][y]!=0) {
+                            movePossible = await moveBlock(x, y, 0, -1) || movePossible;
+                        }
                     }
                 }
-            }
-            break;
-        case "ArrowRight":
-            // droite
-            for(let x=0; x<4; x++) {
-                for(let y=2; y>=0; y--) {
-                    if(gridArray[x][y]!=0) {
-                        movePossible = await moveBlock(x, y, 0, 1) || movePossible;
+                break;
+            case "ArrowRight":
+                // droite
+                for(let x=0; x<4; x++) {
+                    for(let y=2; y>=0; y--) {
+                        if(gridArray[x][y]!=0) {
+                            movePossible = await moveBlock(x, y, 0, 1) || movePossible;
+                        }
                     }
                 }
-            }
-            break;
-        default:
-            break;
+                break;
+            default:
+                break;
+        }
     }
 
     if (movePossible) {

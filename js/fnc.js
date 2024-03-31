@@ -38,6 +38,7 @@ async function randomBlock() {
     } else {
         //perdu!
         console.log('LOSER');
+        youLoose=true;
     }
 }
 //----------------------------------------------------
