@@ -8,7 +8,7 @@ function randomLocation() {
 //----------------------------------------------------
 
 //RANDOM BLOCK
-function randomBlock() {
+async function randomBlock() {
     //on vérifie si tableau complet
     let count=0;
     for(let i=0; i<4; i++) {
@@ -28,6 +28,9 @@ function randomBlock() {
         if(parent.firstChild==null) {
             const newBox=createBox(parent,2);
             gridArray[random.row][random.column]=2;
+            newBox.classList.add('blockFadeIn');
+            await sleep(100);
+            newBox.classList.remove('blockFadeIn');
         } else {
             //sinon on relance
             return randomBlock();
