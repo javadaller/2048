@@ -9,7 +9,7 @@ const start=document.querySelector('#start_button');
 start.addEventListener('click', startGame);
 
 
-//START GAME
+//START GAME-----------------------------------
 function startGame() {
     if(!started) {
         start.innerHTML='RESTART';
@@ -28,10 +28,9 @@ function startGame() {
     const parent=document.querySelector('#case'+random.row+random.column);
     const newBox=createBox(parent,2);
     gridArray[random.row][random.column]=2;
-    console.log(gridArray);
 }
 
-//CLAVIER
+//CLAVIER-------------------------------------------------------------
 function handleKeyDown(event) {
     switch(event.key) {
         case "ArrowUp":
@@ -56,17 +55,23 @@ function handleKeyDown(event) {
             break;
         case "ArrowLeft":
             // gauche
-            for(let y=0; y<4; y++) { //row
-                for(let x=0; x<4; x++) { //column
+            for(let x=0; x<4; x++) {
+                for(let y=1; y<4; y++) {
                     if(gridArray[x][y]!=0) {
-                        moveBlockUp(x,y);
+                        moveBlockLeft(x,y);
                     }
                 }
             }
             break;
         case "ArrowRight":
             // droite
-
+            for(let x=0; x<4; x++) {
+                for(let y=2; y>=0; y--) {
+                    if(gridArray[x][y]!=0) {
+                        moveBlockRight(x,y);
+                    }
+                }
+            }
             break;
         default:
             break;
@@ -74,7 +79,7 @@ function handleKeyDown(event) {
 }
 document.addEventListener('keyup', handleKeyDown);
 
-//BOUGER LES BLOCS- ------------------------------
+//BOUGER LES BLOCS- --------------------------------------
 
 function moveBlockUp(x,y) {
     const block=document.querySelector("#case"+x+y).firstChild;
@@ -84,7 +89,6 @@ function moveBlockUp(x,y) {
             document.querySelector('#case'+i+y).appendChild(block);
             gridArray[i][y] = gridArray[i+1][y]; 
             gridArray[i+1][y] = 0;
-            console.log(gridArray);
         } else {
             //case occupée
             break;
@@ -100,7 +104,36 @@ function moveBlockDown(x,y) {
             document.querySelector('#case'+i+y).appendChild(block);
             gridArray[i][y] = gridArray[i-1][y]; 
             gridArray[i-1][y] = 0;
-            console.log(gridArray);
+        } else {
+            //case occupée
+            break;
+        }
+    } 
+}
+
+function moveBlockLeft(x,y) {
+    const block=document.querySelector("#case"+x+y).firstChild;
+    for(let j=y-1; j>=0; j--) {
+        if(gridArray[x][j]==0) {
+            //bloc libre
+            document.querySelector('#case'+x+j).appendChild(block);
+            gridArray[x][j] = gridArray[x][j+1]; 
+            gridArray[x][j+1] = 0;
+        } else {
+            //case occupée
+            break;
+        }
+    } 
+}
+
+function moveBlockRight(x,y) {
+    const block=document.querySelector("#case"+x+y).firstChild;
+    for(let j=y+1; j<4; j++) {
+        if(gridArray[x][j]==0) {
+            //bloc libre
+            document.querySelector('#case'+x+j).appendChild(block);
+            gridArray[x][j] = gridArray[x][j-1]; 
+            gridArray[x][j-1] = 0;
         } else {
             //case occupée
             break;
