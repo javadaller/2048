@@ -42,6 +42,7 @@ function handleKeyDown(event) {
                     }
                 }
             }
+            randomBlock();
             break;
         case "ArrowDown":
             // bas
@@ -52,6 +53,7 @@ function handleKeyDown(event) {
                     }
                 }
             }
+            randomBlock();
             break;
         case "ArrowLeft":
             // gauche
@@ -62,6 +64,7 @@ function handleKeyDown(event) {
                     }
                 }
             }
+            randomBlock();
             break;
         case "ArrowRight":
             // droite
@@ -72,28 +75,42 @@ function handleKeyDown(event) {
                     }
                 }
             }
+            randomBlock();
             break;
         default:
             break;
     }
+    logGrid();
 }
 document.addEventListener('keyup', handleKeyDown);
 
 //BOUGER LES BLOCS- --------------------------------------
 
-function moveBlockUp(x,y) {
-    const block=document.querySelector("#case"+x+y).firstChild;
-    for(let i=x-1; i>=0; i--) {
-        if(gridArray[i][y]==0) {
-            //bloc libre
-            document.querySelector('#case'+i+y).appendChild(block);
-            gridArray[i][y] = gridArray[i+1][y]; 
-            gridArray[i+1][y] = 0;
+function moveBlockUp(x, y) {
+    const block = document.querySelector("#case" + x + y).firstChild;
+    let mergeOccurred = false;
+    for (let i = x - 1; i >= 0; i--) {
+        if (gridArray[i][y] === 0) {
+            // Case vide
+            document.querySelector('#case' + i + y).appendChild(block);
+            gridArray[i][y] = gridArray[i + 1][y]; 
+            gridArray[i + 1][y] = 0;
         } else {
-            //case occupée
+            // Case occupée
+            if (gridArray[i][y] === gridArray[x][y] && !mergeOccurred) {
+                const newBlock = document.querySelector("#case" + i + y).firstChild;
+                const value = gridArray[i][y] * 2;
+                gridArray[i][y] = value;
+                gridArray[x][y] = 0;
+                newBlock.innerHTML = value;
+                newBlock.classList.remove('box' + (value / 2));
+                newBlock.classList.add('box' + value);
+                block.remove();
+                mergeOccurred = true;
+            }
             break;
         }
-    }   
+    }
 }
 
 function moveBlockDown(x,y) {
@@ -106,6 +123,9 @@ function moveBlockDown(x,y) {
             gridArray[i-1][y] = 0;
         } else {
             //case occupée
+            if(gridArray[i][y]==block.innerHTML) {
+                console.log('fusion');
+            }
             break;
         }
     } 
@@ -121,6 +141,9 @@ function moveBlockLeft(x,y) {
             gridArray[x][j+1] = 0;
         } else {
             //case occupée
+            if(gridArray[x][j]==block.innerHTML) {
+                console.log('fusion');
+            }
             break;
         }
     } 
@@ -136,6 +159,9 @@ function moveBlockRight(x,y) {
             gridArray[x][j-1] = 0;
         } else {
             //case occupée
+            if(gridArray[x][j]==block.innerHTML) {
+                console.log('fusion');
+            }
             break;
         }
     } 

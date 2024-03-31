@@ -10,3 +10,18 @@
 .box4 {
     background-color: rgb(57, 45, 109);
 }
+.box8 {
+    background-color: rgb(46, 25, 59);
+}
+.box16 {
+    background-color: rgb(83, 45, 109);
+}
+.box32 {
+    background-color: rgb(106, 65, 153);
+}
+.box64 {
+    background-color: rgb(109, 45, 106);
+}
+.box128 {
+    background-color: rgb(145, 59, 140);
+}
