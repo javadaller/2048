@@ -32,6 +32,12 @@ function startGame() {
 
 //CLAVIER-------------------------------------------------------------
 function handleKeyDown(event) {
+    // Retirer l'attribut 'merged' de tous les blocs
+    const allBlocks = document.querySelectorAll('.box');
+    allBlocks.forEach(block => {
+        block.removeAttribute('merged');
+    });
+    
     switch(event.key) {
         case "ArrowUp":
             // haut
@@ -93,76 +99,119 @@ function moveBlockUp(x, y) {
         if (gridArray[i][y] === 0) {
             // Case vide
             document.querySelector('#case' + i + y).appendChild(block);
-            gridArray[i][y] = gridArray[i + 1][y]; 
-            gridArray[i + 1][y] = 0;
+            gridArray[i][y] = gridArray[x][y]; 
+            gridArray[x][y] = 0;
+            x = i;
         } else {
             // Case occupée
             if (gridArray[i][y] === gridArray[x][y] && !mergeOccurred) {
                 const newBlock = document.querySelector("#case" + i + y).firstChild;
-                const value = gridArray[i][y] * 2;
-                gridArray[i][y] = value;
-                gridArray[x][y] = 0;
-                newBlock.innerHTML = value;
-                newBlock.classList.remove('box' + (value / 2));
-                newBlock.classList.add('box' + value);
-                block.remove();
-                mergeOccurred = true;
+                if (!newBlock.getAttribute('merged')) { // Vérifier si le bloc n'a pas déjà fusionné
+                    const value = gridArray[i][y] * 2;
+                    gridArray[i][y] = value;
+                    gridArray[x][y] = 0;
+                    newBlock.innerHTML = value;
+                    newBlock.classList.remove('box' + (value / 2));
+                    newBlock.classList.add('box' + value);
+                    block.remove();
+                    mergeOccurred = true;
+                    newBlock.setAttribute('merged', true); // Marquer le bloc comme fusionné
+                }
             }
             break;
         }
     }
 }
 
-function moveBlockDown(x,y) {
-    const block=document.querySelector("#case"+x+y).firstChild;
-    for(let i=x+1; i<4; i++) {
-        if(gridArray[i][y]==0) {
-            //bloc libre
-            document.querySelector('#case'+i+y).appendChild(block);
-            gridArray[i][y] = gridArray[i-1][y]; 
-            gridArray[i-1][y] = 0;
+function moveBlockDown(x, y) {
+    const block = document.querySelector("#case" + x + y).firstChild;
+    let mergeOccurred = false;
+    for (let i = x + 1; i < 4; i++) {
+        if (gridArray[i][y] === 0) {
+            // Case vide
+            document.querySelector('#case' + i + y).appendChild(block);
+            gridArray[i][y] = gridArray[x][y]; 
+            gridArray[x][y] = 0;
+            x = i;
         } else {
-            //case occupée
-            if(gridArray[i][y]==block.innerHTML) {
-                console.log('fusion');
+            // Case occupée
+            if (gridArray[i][y] === gridArray[x][y] && !mergeOccurred) {
+                const newBlock = document.querySelector("#case" + i + y).firstChild;
+                if (!newBlock.getAttribute('merged')) {
+                    const value = gridArray[i][y] * 2;
+                    gridArray[i][y] = value;
+                    gridArray[x][y] = 0;
+                    newBlock.innerHTML = value;
+                    newBlock.classList.remove('box' + (value / 2));
+                    newBlock.classList.add('box' + value);
+                    block.remove();
+                    mergeOccurred = true;
+                    newBlock.setAttribute('merged', true);
+                }
             }
             break;
         }
-    } 
+    }
 }
 
-function moveBlockLeft(x,y) {
-    const block=document.querySelector("#case"+x+y).firstChild;
-    for(let j=y-1; j>=0; j--) {
-        if(gridArray[x][j]==0) {
-            //bloc libre
-            document.querySelector('#case'+x+j).appendChild(block);
-            gridArray[x][j] = gridArray[x][j+1]; 
-            gridArray[x][j+1] = 0;
+function moveBlockLeft(x, y) {
+    const block = document.querySelector("#case" + x + y).firstChild;
+    let mergeOccurred = false;
+    for (let j = y - 1; j >= 0; j--) {
+        if (gridArray[x][j] === 0) {
+            // Case vide
+            document.querySelector('#case' + x + j).appendChild(block);
+            gridArray[x][j] = gridArray[x][j + 1]; 
+            gridArray[x][j + 1] = 0;
+            y = j;
         } else {
-            //case occupée
-            if(gridArray[x][j]==block.innerHTML) {
-                console.log('fusion');
+            // Case occupée
+            if (gridArray[x][j] === gridArray[x][y] && !mergeOccurred) {
+                const newBlock = document.querySelector("#case" + x + j).firstChild;
+                if (!newBlock.getAttribute('merged')) {
+                    const value = gridArray[x][j] * 2;
+                    gridArray[x][j] = value;
+                    gridArray[x][y] = 0;
+                    newBlock.innerHTML = value;
+                    newBlock.classList.remove('box' + (value / 2));
+                    newBlock.classList.add('box' + value);
+                    block.remove();
+                    mergeOccurred = true;
+                    newBlock.setAttribute('merged', true);
+                }
             }
             break;
         }
-    } 
+    }
 }
 
-function moveBlockRight(x,y) {
-    const block=document.querySelector("#case"+x+y).firstChild;
-    for(let j=y+1; j<4; j++) {
-        if(gridArray[x][j]==0) {
-            //bloc libre
-            document.querySelector('#case'+x+j).appendChild(block);
-            gridArray[x][j] = gridArray[x][j-1]; 
-            gridArray[x][j-1] = 0;
+function moveBlockRight(x, y) {
+    const block = document.querySelector("#case" + x + y).firstChild;
+    let mergeOccurred = false;
+    for (let j = y + 1; j < 4; j++) {
+        if (gridArray[x][j] === 0) {
+            // Case vide
+            document.querySelector('#case' + x + j).appendChild(block);
+            gridArray[x][j] = gridArray[x][j - 1]; 
+            gridArray[x][j - 1] = 0;
+            y = j;
         } else {
-            //case occupée
-            if(gridArray[x][j]==block.innerHTML) {
-                console.log('fusion');
+            // Case occupée
+            if (gridArray[x][j] === gridArray[x][y] && !mergeOccurred) {
+                const newBlock = document.querySelector("#case" + x + j).firstChild;
+                if (!newBlock.getAttribute('merged')) {
+                    const value = gridArray[x][j] * 2;
+                    gridArray[x][j] = value;
+                    gridArray[x][y] = 0;
+                    newBlock.innerHTML = value;
+                    newBlock.classList.remove('box' + (value / 2));
+                    newBlock.classList.add('box' + value);
+                    block.remove();
+                    mergeOccurred = true;
+                    newBlock.setAttribute('merged', true);
+                }
             }
             break;
         }
-    } 
+    }
 }
