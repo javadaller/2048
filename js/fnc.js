@@ -95,3 +95,30 @@ async function animationFusion(div) {
     await sleep(200);
     div.classList.remove('blockFusion');
 }
+
+//------------------------------------------------------------------------------------------
+
+//FAKE MOVE
+async function fakeMove(div,direction) {
+    let animation;
+    switch (direction) {
+        case 'up':
+            animation='move'+direction;
+            break;
+
+        case 'down':
+            animation='move'+direction;
+            break;
+
+        case 'left':
+            animation='move'+direction;
+            break;
+
+        case 'right':
+            animation='move'+direction;
+            break;
+    }
+    div.classList.add(animation);
+    await sleep(100);
+    div.classList.remove(animation);
+}

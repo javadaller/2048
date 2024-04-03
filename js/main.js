@@ -48,7 +48,7 @@ function handleKeyDown(event) {
                 for(let x=1; x<4; x++) {
                     for(let y=0; y<4; y++) {
                         if(gridArray[x][y]!=0) {
-                            movePossible = moveBlock(x, y, -1, 0) || movePossible;
+                            movePossible = moveBlock(x, y, -1, 0,'up') || movePossible;
                         }
                     }
                 }
@@ -58,7 +58,7 @@ function handleKeyDown(event) {
                 for(let x=2; x>=0; x--) {
                     for(let y=0; y<4; y++) {
                         if(gridArray[x][y]!=0) {
-                            movePossible = moveBlock(x, y, 1, 0) || movePossible;
+                            movePossible = moveBlock(x, y, 1, 0,'down') || movePossible;
                         }
                     }
                 }
@@ -68,7 +68,7 @@ function handleKeyDown(event) {
                 for(let x=0; x<4; x++) {
                     for(let y=1; y<4; y++) {
                         if(gridArray[x][y]!=0) {
-                            movePossible = moveBlock(x, y, 0, -1) || movePossible;
+                            movePossible = moveBlock(x, y, 0, -1,'left') || movePossible;
                         }
                     }
                 }
@@ -78,7 +78,7 @@ function handleKeyDown(event) {
                 for(let x=0; x<4; x++) {
                     for(let y=2; y>=0; y--) {
                         if(gridArray[x][y]!=0) {
-                            movePossible = moveBlock(x, y, 0, 1) || movePossible;
+                            movePossible = moveBlock(x, y, 0, 1,'right') || movePossible;
                         }
                     }
                 }
@@ -105,7 +105,7 @@ document.addEventListener('keyup', handleKeyDown);
 
 //BOUGER LES BLOCS- --------------------------------------
 
-function moveBlock(x, y, dx, dy) {
+function moveBlock(x, y, dx, dy,direction) {
     const block = document.querySelector("#case" + x + y).firstChild;
     let mergeOccurred = false;
     let moved = false;
@@ -116,6 +116,7 @@ function moveBlock(x, y, dx, dy) {
     while (i >= 0 && i < 4 && j >= 0 && j < 4) {
         if (gridArray[i][j] === 0) {
             // Case vide
+            fakeMove(block,direction);
             document.querySelector('#case' + i + j).appendChild(block);
             gridArray[i][j] = gridArray[x][y]; 
             gridArray[x][y] = 0;
