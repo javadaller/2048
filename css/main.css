@@ -57,3 +57,11 @@ main {
 #case33 {
     border-radius: 0 0 10px 0;
 }
+
+#display {
+    width:30%;
+    display: flex;
+    justify-content: space-between;
+    color:white;
+    margin-bottom: 15px;
+}

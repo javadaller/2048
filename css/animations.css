@@ -56,7 +56,7 @@
 }
 
 .moveup {
-    animation:moveup 0.1s linear;
+    animation:moveup 0.15s linear;
 }
 @keyframes moveup {
     0% {
@@ -64,11 +64,11 @@
     }
 
     100% {
-        transform: translateY(-25%);
+        transform: translateY(-5%);
     }
 }
 .movedown {
-    animation:movedown 0.1s linear;
+    animation:movedown 0.15s linear;
 }
 @keyframes movedown {
     0% {
@@ -76,11 +76,11 @@
     }
 
     100% {
-        transform: translateY(50px);
+        transform: translateY(5%);
     }
 }
 .moveleft {
-    animation:moveleft 0.1s linear;
+    animation:moveleft 0.15s linear;
 }
 @keyframes moveleft {
     0% {
@@ -88,11 +88,11 @@
     }
 
     100% {
-        transform: translateX(-50px);
+        transform: translateX(-5%);
     }
 }
 .moveright {
-    animation:moveright 0.1s linear;
+    animation:moveright 0.15s linear;
 }
 @keyframes moveright {
     0% {
@@ -100,6 +100,6 @@
     }
 
     100% {
-        transform: translateX(-50px);
+        transform: translateX(5%);
     }
 }

@@ -1,9 +1,11 @@
 //INIT-----------------------------------------
 let started=false;
-let gridArray,youLoose;
+let gridArray,youLoose,score,moves;
 const grid=document.querySelector('#grid');
 const gridChildren=Array.from(grid.children);
 const start=document.querySelector('#start_button');
+const scoreDisplay=document.querySelector('#scoreDisplay');
+const movesDisplay=document.querySelector('#movesDisplay');
 
 // bouton start
 start.addEventListener('click', startGame);
@@ -15,6 +17,10 @@ function startGame() {
     }
     started=true;
     youLoose=false;
+    moves=0;
+    score=0;
+    scoreDisplay.innerHTML=score;
+    movesDisplay.innerHTML=moves;
 
     //remettre le tableau à zéro
     gridArray=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
@@ -90,6 +96,8 @@ function handleKeyDown(event) {
 
     if (movePossible) {
         randomBlock();
+        moves+=1;
+        movesDisplay.innerHTML=moves;
     }
 
     logGrid();
@@ -128,14 +136,21 @@ function moveBlock(x, y, dx, dy,direction) {
             const newBlock = document.querySelector("#case" + i + j).firstChild;
             if (!newBlock.getAttribute('merged')) {
                 const value = gridArray[i][j] * 2;
+
+                // maj tableau
                 gridArray[i][j] = value;
                 gridArray[x][y] = 0;
+
                 newBlock.innerHTML = value;
                 newBlock.classList.remove('box' + (value / 2));
                 newBlock.classList.add('box' + value);
                 block.remove();
                 mergeOccurred = true;
                 newBlock.setAttribute('merged', true);
+
+                // maj du score
+                score+=value;
+                scoreDisplay.innerHTML=score;
             }
             moved = true;
             // animation fusion

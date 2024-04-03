@@ -101,8 +101,12 @@ async function animationFusion(div) {
 //FAKE MOVE
 async function fakeMove(div,direction) {
     let animation;
+    const divID=div.parentNode.id;
+    const ID=divID.split('');
+    console.log(ID);
     switch (direction) {
         case 'up':
+            if(ID[4]==0) {return;}
             animation='move'+direction;
             break;
 
@@ -119,6 +123,6 @@ async function fakeMove(div,direction) {
             break;
     }
     div.classList.add(animation);
-    await sleep(100);
+    await sleep(150);
     div.classList.remove(animation);
 }
