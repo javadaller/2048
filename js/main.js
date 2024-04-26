@@ -100,7 +100,7 @@ function handleKeyDown(event) {
         movesDisplay.innerHTML=moves;
     }
 
-    logGrid();
+    //logGrid();
     
     // Annuler la frappe de clavier
     if (!movePossible) {

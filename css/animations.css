@@ -20,7 +20,7 @@
 }
 @keyframes blockFusion {
     0% {
-        filter:blur(5px) brightness(200%);
+        filter:blur(5px) brightness(150%);
         transform: scale(120%);
     }
 
@@ -64,7 +64,7 @@
     }
 
     100% {
-        transform: translateY(-5%);
+        transform: translateY(-3%);
     }
 }
 .movedown {
@@ -76,7 +76,7 @@
     }
 
     100% {
-        transform: translateY(5%);
+        transform: translateY(3%);
     }
 }
 .moveleft {
@@ -88,7 +88,7 @@
     }
 
     100% {
-        transform: translateX(-5%);
+        transform: translateX(-3%);
     }
 }
 .moveright {
@@ -100,6 +100,6 @@
     }
 
     100% {
-        transform: translateX(5%);
+        transform: translateX(3%);
     }
 }

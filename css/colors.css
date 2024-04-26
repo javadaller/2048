@@ -78,3 +78,9 @@
     box-shadow: inset 0px 0px 25px 5px var(--shadowWhite);
     background-color: rgb(85, 0, 0);
 }
+.box4096 {
+    color:var(--textWhite);
+    text-shadow: 0px 0px 7px var(--textWhite);
+    box-shadow: inset 0px 0px 25px 5px var(--shadowWhite);
+    background-color: rgb(85, 0, 67);
+}
